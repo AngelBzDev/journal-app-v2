@@ -9,7 +9,7 @@ const JournalScreen = () => {
     <>
       <Sidebar />
       <div className="block grid-cols-4 gap-6 md:grid vh-80 scroll">
-        <div className="order-first col-start-1 col-end-3 mb-8 border-2 rounded-2xl">
+        <div className="order-first col-start-1 col-end-3 mb-8 border border-primary rounded-2xl">
           {/* <NothingSelected /> */}
           <NotesScreen />
         </div>
