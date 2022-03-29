@@ -6,8 +6,11 @@ import RoundedButton from "../ui/RoundedButton";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { login, startWithGoogle } from "../../actions/auth";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
   const [formValues, handleInputChange] = useForm({
     email: "",
     password: "",
@@ -17,7 +20,11 @@ const LoginScreen = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    dispatch(login("dasdsadad", "Angelo"));
+  };
+
+  const handleLoginWithGoogle = () => {
+    dispatch(startWithGoogle());
   };
 
   return (
@@ -50,7 +57,7 @@ const LoginScreen = () => {
         O inicia con redes solciales
       </p>
       <div className="mx-auto w-fit">
-        <RoundedButton>
+        <RoundedButton onClick={handleLoginWithGoogle}>
           <FcGoogle />
         </RoundedButton>
       </div>
