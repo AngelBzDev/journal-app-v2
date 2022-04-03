@@ -1,6 +1,12 @@
-import { signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
 import { auth, provider } from "../firebase/firebase.config";
 import types from "../types/types";
+import { finishLoading, startLoading } from "./ui";
 
 export const login = (uid, displayName) => ({
   type: types.login,
@@ -16,5 +22,38 @@ export const startWithGoogle = () => {
     signInWithPopup(auth, provider).then(({ user }) =>
       dispatch(login(user.uid, user.displayName))
     );
+  };
+};
+
+export const startLoginEmailPassword = (email, password) => {
+  return (dispatch) => {
+    dispatch(startLoading())
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        dispatch(login(user.uid, user.displayName));
+
+      dispatch(finishLoading())
+
+      })
+      .catch((e) => {
+        console.log(e, "No existe el usuario")
+
+        dispatch(finishLoading())
+      });
+  };
+};
+
+export const startCreateUserWithEmailAndPassword = (email, password, name) => {
+  return (dispatch) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async ({ user }) => {
+        //Actualizar los datos del perfil
+        await updateProfile(user, {
+          displayName: name,
+        });
+        dispatch(login(user.uid, user.displayName));
+      })
+      .catch((e) => console.log(e));
   };
 };
