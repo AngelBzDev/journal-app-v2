@@ -6,11 +6,13 @@ import RoundedButton from "../ui/RoundedButton";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
-import { useDispatch } from "react-redux";
-import { login, startWithGoogle } from "../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { startLoginEmailPassword, startWithGoogle } from "../../actions/auth";
+import { removeError, setError } from "../../actions/ui";
+import validator from "validator";
+import Message from "../ui/Message";
 
 const LoginScreen = () => {
-  const dispatch = useDispatch();
   const [formValues, handleInputChange] = useForm({
     email: "",
     password: "",
@@ -18,14 +20,46 @@ const LoginScreen = () => {
 
   const { email, password } = formValues;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login("dasdsadad", "Angelo"));
-  };
+  const dispatch = useDispatch();
+  const { msgError, loading } = useSelector((state) => state.ui);
 
   const handleLoginWithGoogle = () => {
     dispatch(startWithGoogle());
   };
+
+  function handleLogin(e) {
+    e.preventDefault();
+    if (isFormValid()) {
+      dispatch(startLoginEmailPassword(email, password));
+    }
+  }
+
+  function isFormValid() {
+    if (validator.isEmpty(email) || validator.isEmpty(password)) {
+      dispatch(setError("Todos los campos son obligatorios"));
+      return false;
+    }
+
+    if (!validator.isEmail(email)) {
+      dispatch(setError("El correo no es valido"));
+      return false;
+    }
+
+    if (
+      !validator.isStrongPassword(password, {
+        minSymbols: 0,
+        minNumbers: 0,
+        minLowercase: 0,
+        minUppercase: 0,
+      })
+    ) {
+      dispatch(setError("La contraseña es muy corta"));
+      return false;
+    }
+
+    dispatch(removeError());
+    return true;
+  }
 
   return (
     <div className="px-5 mx-auto my-10 rounded-2xl md:border-2 md:border-solid md:w-2/6 md:p-8">
@@ -34,7 +68,7 @@ const LoginScreen = () => {
         Inicia para continuar
       </h3>
       <img src={svg} alt="Notas" className="p-10 mx-auto w-80" />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <Input
           name="email"
           type="email"
@@ -49,7 +83,8 @@ const LoginScreen = () => {
           value={password}
           onChange={handleInputChange}
         />
-        <Button color="bg-primary" textColor="text-white">
+        {msgError && <Message message={msgError} type="error" />}
+        <Button color="bg-primary" textColor="text-white" disabled={loading}>
           Iniciar
         </Button>
       </form>
@@ -68,6 +103,7 @@ const LoginScreen = () => {
         <Link
           to={"/auth/register"}
           className="font-semibold underline underline-offset-4 text-strongGreen"
+          onClick={() => dispatch(removeError())}
         >
           Registrate
         </Link>
