@@ -12,9 +12,7 @@ const Input = ({ label, name, type, onChange, value }) => {
           name={name}
           value={value}
           onChange={onChange}
-        >
-          hay mi pichula
-        </textarea>
+        ></textarea>
       ) : (
         <input
           type={type}
