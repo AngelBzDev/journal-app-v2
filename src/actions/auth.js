@@ -16,6 +16,10 @@ export const login = (uid, displayName) => ({
   },
 });
 
+export const logout = () => ({
+  type: types.logout,
+});
+
 export const startWithGoogle = () => {
   //Cuando se retorna un callback, significa que es una accion asincrona y el dispatch no los proporciona thunk
   return (dispatch) => {
@@ -27,19 +31,18 @@ export const startWithGoogle = () => {
 
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
-    dispatch(startLoading())
+    dispatch(startLoading());
 
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         dispatch(login(user.uid, user.displayName));
 
-      dispatch(finishLoading())
-
+        dispatch(finishLoading());
       })
       .catch((e) => {
-        console.log(e, "No existe el usuario")
+        console.log(e, "No existe el usuario");
 
-        dispatch(finishLoading())
+        dispatch(finishLoading());
       });
   };
 };
@@ -55,5 +58,12 @@ export const startCreateUserWithEmailAndPassword = (email, password, name) => {
         dispatch(login(user.uid, user.displayName));
       })
       .catch((e) => console.log(e));
+  };
+};
+
+export const startLogout = () => {
+  return async (dispatch) => {
+    await auth.signOut();
+    dispatch(logout());
   };
 };
