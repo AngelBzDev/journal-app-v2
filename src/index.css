@@ -2,22 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
-.scroll::-webkit-scrollbar{
+.scroll::-webkit-scrollbar {
   width: 5px;
 }
 
-.vh-80{
+.vh-80 {
   height: 100vh;
 }
 
-.vh-50{
+.vh-50 {
   height: 45vh;
 }
 
-@media (min-width: 768px){
-  .vh-80{
+@media (min-width: 768px) {
+  .vh-80 {
     height: 75vh;
   }
+}
+
+/* Loading spinner */
+
+@keyframes ldio-zo0n7teyyrf-r {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+  }
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ldio-zo0n7teyyrf-s {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+  }
+  0% {
+    transform: translate(-81px, -81px) scale(0);
+  }
+  50% {
+    transform: translate(-81px, -81px) scale(1);
+  }
+  100% {
+    transform: translate(-81px, -81px) scale(0);
+  }
+}
+.ldio-zo0n7teyyrf > div {
+  transform: translate(0px, -40.5px);
+}
+.ldio-zo0n7teyyrf > div > div {
+  animation: ldio-zo0n7teyyrf-r 1s linear infinite;
+  transform-origin: 270px 270px;
+}
+.ldio-zo0n7teyyrf > div > div > div {
+  position: absolute;
+  transform: translate(270px, 221.4px);
+}
+.ldio-zo0n7teyyrf > div > div > div > div {
+  width: 162px;
+  height: 162px;
+  border-radius: 50%;
+  background: #6531c4;
+  animation: ldio-zo0n7teyyrf-s 1s linear infinite;
+}
+.ldio-zo0n7teyyrf > div > div:last-child {
+  animation-delay: -0.5s;
+}
+.ldio-zo0n7teyyrf > div > div:last-child > div > div {
+  animation-delay: -0.5s;
+  background: #94ffb9;
+}
+.loadingio-spinner-interwind-jsvbesed1f {
+  width: 540px;
+  height: 540px;
+  display: inline-block;
+  overflow: hidden;
+  background: #ffffff;
+}
+.ldio-zo0n7teyyrf {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-zo0n7teyyrf div {
+  box-sizing: content-box;
 }
