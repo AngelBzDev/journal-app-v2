@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
+import Swal from "sweetalert2";
 import { auth, provider } from "../firebase/firebase.config";
 import types from "../types/types";
 import { finishLoading, startLoading } from "./ui";
@@ -40,8 +41,15 @@ export const startLoginEmailPassword = (email, password) => {
         dispatch(finishLoading());
       })
       .catch((e) => {
-        console.log(e, "No existe el usuario");
-
+        Swal.fire({
+          title: "Ups!!",
+          icon: "error",
+          text: `${
+            e.code === "auth/user-not-found"
+              ? "El usuario no existe"
+              : "La contraseña es incorrecta"
+          }`,
+        });
         dispatch(finishLoading());
       });
   };
@@ -57,7 +65,17 @@ export const startCreateUserWithEmailAndPassword = (email, password, name) => {
         });
         dispatch(login(user.uid, user.displayName));
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        Swal.fire({
+          title: "Ups!!",
+          icon: "error",
+          text: `${
+            e.code === "auth/email-already-in-use"
+              ? "El correo ya esta en uso"
+              : e.message
+          }`,
+        });
+      });
   };
 };
 
