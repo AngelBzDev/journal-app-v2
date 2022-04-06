@@ -2,6 +2,7 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import authReducer from "../reducers/authReducer";
+import notesReducer from "../reducers/notesReducer";
 import uiReducer from "../reducers/uiReducer";
 
 const composeEnhancers =
@@ -13,7 +14,8 @@ const composeEnhancers =
 const reducers = combineReducers({
   //La estructura de este objeto es como se vera el state
   auth: authReducer,
-  ui: uiReducer
+  ui: uiReducer,
+  notes: notesReducer
 });
 
 //Para crear un store usamos createStore al cual se le pasa SOLO un reducer como parametro
