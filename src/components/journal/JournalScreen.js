@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import NotesBar from "../notes/NotesBar";
 import NotesScreen from "../notes/NotesScreen";
 import JournalEntries from "./JournalEntries";
 import NothingSelected from "./NothingSelected";
@@ -13,6 +14,7 @@ const JournalScreen = () => {
       <Sidebar />
       <div className="block grid-cols-4 gap-6 md:grid vh-80 scroll">
         <div className="order-first col-start-1 col-end-3 mb-8 border border-primary rounded-2xl">
+          <NotesBar />
           {notes.active ? <NotesScreen /> : <NothingSelected />}
         </div>
         <img

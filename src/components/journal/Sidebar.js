@@ -23,8 +23,8 @@ const Sidebar = () => {
         Cerrar sesión
       </button>
       <button
-        to={"/"}
         className="block text-xl font-semibold md:hidden text-strongGreen"
+        onClick={handleLogout}
       >
         <ImExit />
       </button>

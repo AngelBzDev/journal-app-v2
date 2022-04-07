@@ -3,8 +3,8 @@ import { AiOutlineStar } from "react-icons/ai";
 
 const NothingSelected = () => {
   return (
-    <div className="py-40 h-full flex items-center justify-center">
-      <p className="text-xl font-bold text-strongGreen text-center">
+    <div className="flex items-center justify-center h-5/6">
+      <p className="text-xl font-bold text-center text-strongGreen">
       <AiOutlineStar style={{margin: '0 auto 15px auto', }} size='30px' /> Seleccione alguna nota
       </p>
     </div>
