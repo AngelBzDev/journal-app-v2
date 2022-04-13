@@ -8,8 +8,7 @@ import AuthRouter from "./AuthRouter";
 import LoadingScreen from "../components/ui/LoadingScreen";
 import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
-import loadNotes from "../helpers/loadNotes";
-import { setNotes } from "../actions/notes";
+import { startLoadingNotes } from "../actions/notes";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -20,14 +19,12 @@ const AppRouter = () => {
   //Mantener la sesion iniciada
   useEffect(() => {
     //Observable que esta al pendiente de la autenticacion, cada que la auth cambie se va a ejecutar
-    auth.onAuthStateChanged( async(user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
         setIsLoggin(true);
-
-        const notes = await loadNotes(user.uid)
-        //Como aqui es la primerea vez que conocemos el uid del usuario, se llama a loadNotes
-        dispatch(setNotes(notes));
+        //Como aqui es la primerea vez que conocemos el uid del usuario, se hace el dispatch de la accion asincrona
+        dispatch(startLoadingNotes(user.uid));
       } else {
         setIsLoggin(false);
       }
