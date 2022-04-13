@@ -13,15 +13,17 @@ const JournalScreen = () => {
     <>
       <Sidebar />
       <div className="block grid-cols-4 gap-6 md:grid vh-80 scroll">
-        <div className="order-first col-start-1 col-end-3 mb-8 border border-primary rounded-2xl">
+        <div className="order-first col-start-1 col-end-3 mb-8 bg-white border rounded-2xl">
           <NotesBar />
           {notes.active ? <NotesScreen /> : <NothingSelected />}
         </div>
-        <img
-          src="https://play-lh.googleusercontent.com/40I0MAr1getFF-dLOzxekLi2_C3MC_u0HL2gmqNbXNWy32n9Bo3XIz2YYlAutfCT8aw"
-          alt="Imagen"
-          className="w-2/4 mx-auto mb-8 rounded-2xl md:w-full"
-        />
+        <div className="w-3/4 mx-auto">
+          <img
+            src="https://play-lh.googleusercontent.com/40I0MAr1getFF-dLOzxekLi2_C3MC_u0HL2gmqNbXNWy32n9Bo3XIz2YYlAutfCT8aw"
+            alt="Imagen"
+            className="w-full mb-8 rounded-2xl md:w-full"
+          />
+        </div>
         <JournalEntries />
       </div>
     </>
