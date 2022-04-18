@@ -1,14 +1,12 @@
-import React from 'react'
-import Button from '../ui/Button'
+import React from "react";
+import Button from "../ui/Button";
 
 const AddNote = () => {
   return (
-    <div className=''>
-      <Button color={'bg-primary'}>
-        Agregar
-      </Button>
+    <div>
+      <Button color={"bg-primary"}>Agregar</Button>
     </div>
-  )
-}
+  );
+};
 
-export default AddNote
+export default AddNote;
