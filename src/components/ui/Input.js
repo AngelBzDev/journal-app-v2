@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ label, name, type, onChange, value }) => {
+const Input = ({ label, name, type, onChange, value, place }) => {
   return (
     <div className="mb-3">
       <label className="block mb-1 font-semibold text-strongGreen">
@@ -10,6 +10,7 @@ const Input = ({ label, name, type, onChange, value }) => {
         <textarea
           className="w-full px-0 py-2 text-lg font-semibold border-b-2 resize-none vh-50 focus:outline-none focus:border-primary"
           name={name}
+          placeholder={place}
           value={value}
           onChange={onChange}
         ></textarea>
@@ -18,6 +19,7 @@ const Input = ({ label, name, type, onChange, value }) => {
           type={type}
           className="w-full px-0 py-2 text-lg font-semibold border-b-2 focus:outline-none focus:border-primary"
           name={name}
+          placeholder={place}
           value={value}
           onChange={onChange}
         />
